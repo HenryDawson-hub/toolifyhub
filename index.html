@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Free online tools: word counter, calculators, converters, QR code helper and more. Fast, simple and privacy-friendly.">
+<title>ToolifyHub — Free Online Tools</title>
+<style>
+:root{--bg:#f6f8fc;--card:#fff;--text:#172033;--muted:#68738a;--brand:#5b5ce2;--line:#e7eaf2;--shadow:0 8px 28px #202b4510}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--text)}
+header{background:var(--card);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+.nav{max-width:1120px;margin:auto;padding:16px 22px;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.logo{font-size:22px;font-weight:850;letter-spacing:-.7px}.logo span{color:var(--brand)}
+button,.btn{border:0;border-radius:11px;background:var(--brand);color:white;padding:11px 15px;font-weight:700;cursor:pointer}
+button.secondary{background:#eef0ff;color:#4244b9}
+main{max-width:1120px;margin:auto;padding:44px 22px 70px}
+.hero{text-align:center;padding:35px 0 25px}.eyebrow{color:var(--brand);font-weight:800;font-size:12px;letter-spacing:1.5px;text-transform:uppercase}
+h1{font-size:clamp(34px,6vw,56px);line-height:1.05;letter-spacing:-2px;margin:14px 0}
+.hero p{color:var(--muted);font-size:17px;max-width:620px;margin:0 auto 24px}
+.search{max-width:560px;margin:auto;display:flex;background:white;border:1px solid var(--line);border-radius:14px;padding:6px;box-shadow:var(--shadow)}
+.search input{border:0;outline:0;flex:1;padding:10px 12px;font-size:15px;min-width:0}
+.section-head{display:flex;align-items:end;justify-content:space-between;margin:32px 0 16px;gap:10px}
+.section-head h2{margin:0;font-size:23px}.muted{color:var(--muted);font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.tool-card{background:var(--card);border:1px solid var(--line);border-radius:17px;padding:19px;text-align:left;box-shadow:var(--shadow);cursor:pointer;transition:.18s}
+.tool-card:hover{transform:translateY(-3px);border-color:#b9baff}.emoji{font-size:26px}.tool-card h3{margin:12px 0 6px;font-size:17px}.tool-card p{margin:0;color:var(--muted);font-size:13px;line-height:1.5}
+.panel{display:none;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:23px;margin-top:24px;box-shadow:var(--shadow)}
+.panel.active{display:block}.panel h2{margin:0 0 6px}.panel p{color:var(--muted);margin-top:0}
+.field{margin:14px 0}.field label{display:block;font-weight:700;font-size:13px;margin-bottom:7px}
+input,textarea,select{width:100%;padding:12px;border:1px solid #dfe3ee;border-radius:10px;font:inherit;background:white;color:#172033}
+textarea{min-height:120px;resize:vertical}.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.result{background:#f1f2ff;border-radius:12px;padding:14px;margin-top:14px;white-space:pre-wrap;overflow-wrap:anywhere}
+.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}
+footer{border-top:1px solid var(--line);background:white;padding:26px 22px;text-align:center;color:var(--muted);font-size:13px}
+a{color:var(--brand);text-decoration:none}
+@media(max-width:760px){.grid{grid-template-columns:repeat(2,1fr)}main{padding-top:25px}}
+@media(max-width:500px){.grid,.row{grid-template-columns:1fr}.nav{padding:13px 16px}main{padding-left:16px;padding-right:16px}.hero{padding-top:22px}}
+</style>
+</head>
+<body>
+<header><div class="nav"><div class="logo">Toolify<span>Hub</span></div><button class="secondary" id="themeBtn">🌙 Dark mode</button></div></header>
+<main>
+<section class="hero">
+<div class="eyebrow">Simple · Fast · Free</div>
+<h1>Free tools for<br><span style="color:var(--brand)">everyday tasks.</span></h1>
+<p>Useful online tools in one place. No sign-up required. Your text and calculations stay in your browser.</p>
+<div class="search"><input id="search" placeholder="Search a tool..." aria-label="Search tools"><button onclick="filterTools()">Search</button></div>
+</section>
+<div class="section-head"><h2>Explore tools</h2><span class="muted" id="count">10 free tools</span></div>
+<div class="grid" id="grid">
+<button class="tool-card" data-name="word counter" onclick="openTool('words')"><div class="emoji">📝</div><h3>Word Counter</h3><p>Count words, characters, sentences and reading time.</p></button>
+<button class="tool-card" data-name="case converter" onclick="openTool('case')"><div class="emoji">🔠</div><h3>Case Converter</h3><p>Convert text to uppercase, lowercase or title case.</p></button>
+<button class="tool-card" data-name="remove extra spaces" onclick="openTool('spaces')"><div class="emoji">🧹</div><h3>Remove Extra Spaces</h3><p>Clean up repeated spaces and blank lines.</p></button>
+<button class="tool-card" data-name="percentage calculator" onclick="openTool('percent')"><div class="emoji">％</div><h3>Percentage Calculator</h3><p>Calculate a percentage of any number.</p></button>
+<button class="tool-card" data-name="age calculator" onclick="openTool('age')"><div class="emoji">🎂</div><h3>Age Calculator</h3><p>Calculate your age from your date of birth.</p></button>
+<button class="tool-card" data-name="bmi calculator" onclick="openTool('bmi')"><div class="emoji">⚖️</div><h3>BMI Calculator</h3><p>Calculate body mass index from height and weight.</p></button>
+<button class="tool-card" data-name="unit converter" onclick="openTool('unit')"><div class="emoji">📏</div><h3>Unit Converter</h3><p>Convert common length, weight and temperature units.</p></button>
+<button class="tool-card" data-name="image resizer" onclick="openTool('image')"><div class="emoji">🖼️</div><h3>Image Resizer</h3><p>Resize an image in your browser and download it.</p></button>
+<button class="tool-card" data-name="qr code generator" onclick="openTool('qr')"><div class="emoji">▦</div><h3>QR Code Generator</h3><p>Create a QR code for a link or short text.</p></button>
+<button class="tool-card" data-name="loan calculator" onclick="openTool('loan')"><div class="emoji">💰</div><h3>Loan Calculator</h3><p>Estimate monthly loan payments and total interest.</p></button>
+</div>
+<section class="panel" id="panel"><h2 id="toolTitle">Tool</h2><p id="toolDesc"></p><div id="toolBody"></div><div class="actions"><button class="secondary" onclick="closeTool()">← Back to tools</button></div></section>
+</main>
+<footer>© 2026 ToolifyHub · Free tools for everyone · <a href="mailto:hello@example.com">Contact</a><br><br>Privacy-friendly: most tools process your data locally in your browser.</footer>
+<script>
+const $=id=>document.getElementById(id);
+function filterTools(){let q=$('search').value.toLowerCase();let n=0;document.querySelectorAll('.tool-card').forEach(c=>{let show=c.dataset.name.includes(q);c.style.display=show?'block':'none';if(show)n++});$('count').textContent=n+' tools found'}
+$('search').addEventListener('input',filterTools);
+$('themeBtn').onclick=()=>{let dark=document.body.dataset.dark!=='1';document.body.dataset.dark=dark?'1':'0';document.documentElement.style.setProperty('--bg',dark?'#101525':'#f6f8fc');document.documentElement.style.setProperty('--card',dark?'#192238':'#fff');document.documentElement.style.setProperty('--text',dark?'#edf1ff':'#172033');document.documentElement.style.setProperty('--muted',dark?'#aab4cb':'#68738a');document.documentElement.style.setProperty('--line',dark?'#2b3854':'#e7eaf2');$('themeBtn').textContent=dark?'☀️ Light mode':'🌙 Dark mode'};
+function openTool(name){$('panel').classList.add('active');$('panel').scrollIntoView({behavior:'smooth',block:'start'});let body='';
+const field=(label,id,type='text',placeholder='')=>`<div class="field"><label>${label}</label><input id="${id}" type="${type}" placeholder="${placeholder}"></div>`;
+const btn=(label,fn)=>`<div class="actions"><button onclick="${fn}">${label}</button></div>`;
+const result='<div class="result" id="result">Your result will appear here.</div>';
+const area='<div class="field"><label>Enter your text</label><textarea id="txt" placeholder="Type or paste your text here..."></textarea></div>';
+const configs={
+words:['Word Counter','Count words and characters instantly.',area+result+btn('Count words','doWords()')],
+case:['Case Converter','Change the capitalization of your text.',area+`<div class="actions"><button onclick="doCase('upper')">UPPERCASE</button><button onclick="doCase('lower')">lowercase</button><button onclick="doCase('title')">Title Case</button></div>`+result],
+spaces:['Remove Extra Spaces','Remove repeated spaces and empty lines.',area+btn('Clean text','doSpaces()')+result],
+percent:['Percentage Calculator','Find what percentage one number is of another, or calculate a percentage of a value.',field('Percentage (%)','p','number','15')+field('Number','v','number','200')+btn('Calculate','doPercent()')+result],
+age:['Age Calculator','Enter your date of birth to calculate your age.',field('Date of birth','dob','date')+btn('Calculate age','doAge()')+result],
+bmi:['BMI Calculator','A simple BMI estimate using metric units.',field('Weight (kg)','weight','number','70')+field('Height (cm)','height','number','175')+btn('Calculate BMI','doBMI()')+result],
+unit:['Unit Converter','Convert length, weight or temperature.',`<div class="field"><label>Category</label><select id="cat" onchange="unitOptions()"><option value="length">Length</option><option value="weight">Weight</option><option value="temp">Temperature</option></select></div><div class="row"><div class="field"><label>From</label><select id="from"></select></div><div class="field"><label>To</label><select id="to"></select></div></div>`+field('Value','uv','number','Enter value')+btn('Convert','doUnit()')+result],
+image:['Image Resizer','Resize an image locally, then download the result.',`<div class="field"><label>Choose image</label><input id="file" type="file" accept="image/*"></div><div class="row">${field('Width (px)','iw','number','800')}${field('Height (px)','ih','number','600')}</div><label><input type="checkbox" id="keep" checked style="width:auto"> Keep aspect ratio</label><div id="preview"></div>`+btn('Resize & download','doImage()')],
+qr:['QR Code Generator','Create a QR code for a URL or text. Requires an internet connection to load the QR image.',field('Text or URL','qrtext','text','https://example.com')+btn('Generate QR','doQR()')+`<div id="qrout" class="result">Your QR code will appear here.</div>`],
+loan:['Loan Calculator','Estimate monthly payments for a fixed-rate loan.',field('Loan amount ($)','amount','number','10000')+field('Annual interest rate (%)','rate','number','8')+field('Term (years)','years','number','5')+btn('Calculate payment','doLoan()')+result]
+};
+let c=configs[name];$('toolTitle').textContent=c[0];$('toolDesc').textContent=c[1];$('toolBody').innerHTML=c[2];if(name==='unit')unitOptions();if(name==='image')$('file').addEventListener('change',previewImage);
+}
+function closeTool(){$('panel').classList.remove('active')}
+function out(s){$('result').textContent=s}
+function doWords(){let t=$('txt').value.trim(),w=t?t.split(/\s+/).length:0;out(`Words: ${w}\nCharacters: ${$('txt').value.length}\nCharacters (no spaces): ${$('txt').value.replace(/\s/g,'').length}\nSentences: ${t?(t.match(/[.!?]+/g)||[]).length:0}\nReading time: ${Math.max(1,Math.ceil(w/200))} min`)}
+function doCase(m){let t=$('txt').value;if(m==='upper')t=t.toUpperCase();if(m==='lower')t=t.toLowerCase();if(m==='title')t=t.toLowerCase().replace(/\b\w/g,x=>x.toUpperCase());$('txt').value=t;out('Text converted.')}
+function doSpaces(){let t=$('txt').value.replace(/[ \t]+/g,' ').replace(/\n\s*\n+/g,'\n').trim();$('txt').value=t;out(t||'Nothing to clean.')}
+function doPercent(){let p=+$('p').value,v=+$('v').value;out(`${p}% of ${v} = ${(p/100*v).toLocaleString(undefined,{maximumFractionDigits:4})}`)}
+function doAge(){let d=new Date($('dob').value);if(isNaN(d))return out('Please select a valid date.');let n=new Date();if(d>n)return out('Date of birth cannot be in the future.');let y=n.getFullYear()-d.getFullYear(),m=n.getMonth()-d.getMonth(),day=n.getDate()-d.getDate();if(day<0){m--;day+=new Date(n.getFullYear(),n.getMonth(),0).getDate()}if(m<0){y--;m+=12}out(`Your age: ${y} years, ${m} months and ${day} days.`)}
+function doBMI(){let w=+$('weight').value,h=+$('height').value/100;if(!w||!h)return out('Enter a valid weight and height.');let b=w/(h*h);out(`Your BMI: ${b.toFixed(1)}\n${b<18.5?'Below standard adult range':b<25?'Within standard adult range':b<30?'Above standard adult range':'High BMI range'}\nBMI is a screening measure, not a diagnosis.`)}
+const units={length:{m:1,km:1000,cm:.01,mm:.001,ft:.3048,in:.0254},weight:{kg:1,g:.001,lb:.45359237,oz:.0283495}};
+function unitOptions(){let c=$('cat').value,opts=c==='temp'?['Celsius','Fahrenheit','Kelvin']:Object.keys(units[c]);$('from').innerHTML=opts.map(x=>`<option>${x}</option>`).join('');$('to').innerHTML=opts.map(x=>`<option>${x}</option>`).join('')}
+function doUnit(){let c=$('cat').value,v=+$('uv').value,a=$('from').value,b=$('to').value;if(!Number.isFinite(v))return out('Enter a valid number.');let r;if(c==='temp'){let x=a==='Celsius'?v:a==='Fahrenheit'?(v-32)*5/9:v-273.15;r=b==='Celsius'?x:b==='Fahrenheit'?x*9/5+32:x+273.15}else r=v*units[c][a]/units[c][b];out(`${v} ${a} = ${Number(r.toFixed(6))} ${b}`)}
+let imgObj=null;function previewImage(e){let f=e.target.files[0];if(!f)return;let u=URL.createObjectURL(f);imgObj=new Image();imgObj.onload=()=>{$('preview').innerHTML=`<p class="muted">Original: ${imgObj.width} × ${imgObj.height}</p><img src="${u}" style="max-width:100%;max-height:180px;border-radius:10px">`};imgObj.src=u}
+function doImage(){if(!imgObj)return alert('Choose an image first.');let w=+$('iw').value,h=+$('ih').value;if(!w||!h)return alert('Enter valid dimensions.');if($('keep').checked){let r=Math.min(w/imgObj.width,h/imgObj.height);w=Math.round(imgObj.width*r);h=Math.round(imgObj.height*r)}let c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(imgObj,0,0,w,h);c.toBlob(b=>{let a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='resized-image.png';a.click()},'image/png')}
+function doQR(){let t=$('qrtext').value.trim();if(!t)return out('Enter text or a URL first.');$('qrout').innerHTML=`<img alt="Generated QR code" style="width:220px;height:220px;display:block;margin:auto" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(t)}"><p class="muted">QR image is provided by a third-party service.</p>`}
+function doLoan(){let a=+$('amount').value,r=+$('rate').value/1200,n=+$('years').value*12;if(!a||!n||r<0)return out('Enter valid loan details.');let p=r===0?a/n:a*r/(1-Math.pow(1+r,-n));out(`Estimated monthly payment: $${p.toFixed(2)}\nTotal repayment: $${(p*n).toFixed(2)}\nTotal interest: $${(p*n-a).toFixed(2)}\nEstimate only; excludes fees and other charges.`)}
+</script>
+</body></html>
